@@ -1,0 +1,234 @@
+/* ==========================================================================
+   Importação de Fontes e Reset Global
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ==========================================================================
+   Variáveis de Cores e Estilos (Design Tokens)
+   ========================================================================== */
+:root {
+    --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%);
+    --card-bg: rgba(255, 255, 255, 0.95);
+    --primary-color: #4f46e5;
+    --primary-hover: #4338ca;
+    --primary-active: #3730a3;
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --input-border: #cbd5e1;
+    --input-focus: #6366f1;
+    --results-bg: #f8fafc;
+    --results-border: #e2e8f0;
+    --accent-green: #059669;
+    --shadow-card: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+    --radius-lg: 20px;
+    --radius-md: 12px;
+    --radius-sm: 8px;
+    --transition-fast: 0.2s ease;
+}
+
+/* ==========================================================================
+   Estrutura da Página e Centralização com Flexbox
+   ========================================================================== */
+body {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg-gradient);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    color: var(--text-main);
+}
+
+/* ==========================================================================
+   Container Principal (Card da Calculadora)
+   ========================================================================== */
+#calculator-container {
+    background: var(--card-bg);
+    width: 100%;
+    max-width: 440px;
+    padding: 36px 32px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    backdrop-filter: blur(16px);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==========================================================================
+   Cabeçalho
+   ========================================================================== */
+#calculator-title {
+    font-size: 1.6rem;
+    font-weight: 800;
+    text-align: center;
+    color: var(--text-main);
+    letter-spacing: -0.02em;
+}
+
+/* ==========================================================================
+   Formulário e Grupos de Entrada
+   ========================================================================== */
+#calculator-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.input-group label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 1rem;
+    font-family: inherit;
+    color: var(--text-main);
+    background-color: #ffffff;
+    border: 2px solid var(--input-border);
+    border-radius: var(--radius-md);
+    outline: none;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.input-group input:hover {
+    border-color: #94a3b8;
+}
+
+.input-group input:focus {
+    border-color: var(--input-focus);
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+}
+
+/* Ocultar setas padrão de input number em navegadores */
+.input-group input::-webkit-outer-spin-button,
+.input-group input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.input-group input[type=number] {
+    -moz-appearance: textfield;
+}
+
+/* ==========================================================================
+   Botão de Ação
+   ========================================================================== */
+#calculate-button {
+    width: 100%;
+    padding: 14px 20px;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: inherit;
+    color: #ffffff;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+    box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);
+    margin-top: 4px;
+}
+
+#calculate-button:hover {
+    background: linear-gradient(135deg, #4338ca, #3730a3);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(79, 70, 229, 0.45);
+}
+
+#calculate-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(79, 70, 229, 0.3);
+}
+
+/* ==========================================================================
+   Seção de Destaque para os Resultados
+   ========================================================================== */
+#results-container {
+    background: var(--results-bg);
+    border: 2px solid var(--results-border);
+    border-radius: var(--radius-md);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+#results-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--results-border);
+    padding-bottom: 8px;
+}
+
+.result-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+#tip-amount-display {
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: var(--primary-color);
+}
+
+#total-amount-display {
+    font-weight: 800;
+    font-size: 1.3rem;
+    color: var(--accent-green);
+}
+
+/* ==========================================================================
+   Responsividade
+   ========================================================================== */
+@media (max-width: 480px) {
+    #calculator-container {
+        padding: 24px 20px;
+    }
+
+    #calculator-title {
+        font-size: 1.35rem;
+    }
+
+    .result-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+}
